@@ -39,9 +39,9 @@ async function run() {
     const itemCollection = database.collection("items");
 
     app.post('/items', async (req, res)=>{
-      const user = req.body;
-      console.log(user, "from server")
-      const result = await itemCollection.insertOne(user);
+      const item = req.body;
+      // console.log(user, "from server")
+      const result = await itemCollection.insertOne(item);
       res.send(result);
 
     });
@@ -56,6 +56,44 @@ async function run() {
       const id= req.params.id;
       const query={_id: new ObjectId(id)};
       const result= await itemCollection.findOne(query);
+      res.send(result);
+    })
+
+    // app.get('/items/:email', async(req, res)=>{
+    //   const email= req.params.email;
+    //   const query = {email: email}
+    //   const result= await itemCollection.find(query).toArray();
+    //   res.send(result);
+    // })
+
+    app.delete('/items/:id', async (req, res)=>{
+      const id= req.params.id;
+      const query= {_id: new ObjectId(id)};
+      const result = await itemCollection.deleteOne(query);
+      res.send(result);
+    })
+
+    app.put('/items/:id', async (req, res)=>{
+      const id= req.params.id;
+      const updateData =req.body;
+      
+      const filter= {_id: new ObjectId(id)};
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+            Img_url: updateData.Img_url, 
+            item_name: updateData.item_name, 
+            sub_category: updateData.sub_category, 
+            processing_time: updateData.processing_time, 
+            stock_status: updateData.stock_status, 
+            price: updateData.price, 
+            rating: updateData.rating, 
+            customization: updateData.customization, 
+            short_description: updateData.short_description, 
+            
+        },
+      };
+      const result = await itemCollection.updateOne(filter, updateDoc, options);
       res.send(result);
     })
 
