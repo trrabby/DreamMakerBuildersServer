@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   })
   
   app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Server running on port ${port}`)
   })
 
 
@@ -76,7 +76,6 @@ async function run() {
     app.put('/items/:id', async (req, res)=>{
       const id= req.params.id;
       const updateData =req.body;
-      
       const filter= {_id: new ObjectId(id)};
       const options = { upsert: true };
       const updateDoc = {
