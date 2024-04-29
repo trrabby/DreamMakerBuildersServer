@@ -5,7 +5,9 @@ require('dotenv').config();
 const port = process.env.PORT || 4000; 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173/", "https://fiberfution.firebaseapp.com/"]
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
