@@ -17,7 +17,6 @@ app.listen(port, () => {
 })
 
 
-
 //   const uri = "mongodb://localhost:27017"; 
 const uri = `mongodb+srv://${process.env.DB_User}:${process.env.DB_Pass}@cluster0.xygzlb8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
@@ -130,6 +129,7 @@ async function run() {
       const result = await itemCollection.updateOne(filter, updateDoc, options);
       res.send(result);
     })
+
     
     app.put('/artCategory/:id', async (req, res) => {
       const id = req.params.id;
