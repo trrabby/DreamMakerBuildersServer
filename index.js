@@ -54,6 +54,8 @@ async function run() {
 
     });
 
+    
+    
     app.get('/items', async (req, res) => {
       const cursor = itemCollection.find()
       const result = await cursor.toArray();
@@ -93,6 +95,8 @@ async function run() {
       res.send(result);
     })
 
+   
+   
     app.delete('/items/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -107,6 +111,8 @@ async function run() {
       res.send(result);
     })
 
+    
+    
     app.put('/items/:id', async (req, res) => {
       const id = req.params.id;
       const updateData = req.body;
@@ -130,7 +136,7 @@ async function run() {
       res.send(result);
     })
 
-    
+
     app.put('/artCategory/:id', async (req, res) => {
       const id = req.params.id;
       const updateData = req.body;
@@ -158,7 +164,9 @@ async function run() {
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
+  } 
+  
+  finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
   }
